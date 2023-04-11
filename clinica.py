@@ -1,5 +1,6 @@
 from medico import Medico, Cardiologista, Dermatologista, Geral, Cirurgiao
 from paciente import Paciente
+import winsound as ws
 
 class Clinica:
 
@@ -40,6 +41,7 @@ class Clinica:
             f"4 - Voltar ao Menu anterior")
             try:
                 menu2 = int(input(">> "))
+                ws.Beep(170, 500)
                 if menu2 < 1 or menu2 > 4:
                     raise Exception("Opção Inválida.")
                 if menu2 == 4:
@@ -102,6 +104,7 @@ class Clinica:
             f"2 - Listar Pacientes\n"
             f"3 - Voltar ao Menu anterior")
             try:
+                ws.Beep(170, 500)
                 menu2 = int(input(">> "))
                 if menu2 < 1 or menu2 > 3:
                     raise Exception("Opção Inválida.")
@@ -113,6 +116,7 @@ class Clinica:
             
             if menu2 == 1:
                 print("....Cadastrando Novo Paciente....\n")
+                ws.Beep(370, 500)
                 documento = input("Documento:\n")
                 nome = input("Nome:\n")
                 idade = int(input("Idade:\n"))
@@ -123,8 +127,8 @@ class Clinica:
                     lista += "({0}) - {1} (Especialidade: {2})\n".format(x.matricula, x.nome, x.especialidade)
                 medico = int(input(lista))
                 paciente = Paciente(documento, nome, idade, cpf, particular, medico)
-                self.adicionarPaciente(paciente)
                 print("\nPaciente cadastrado com sucesso!\n")
+                ws.Beep(470, 500)
                 continue
             if menu2 == 2:
                 self.imprimirListaPacientes()
@@ -140,6 +144,7 @@ class Clinica:
             f"5 - Voltar ao menu anterior\n")
             try:
                 menu2 = int(input(">> "))
+                ws.Beep(170, 500)
                 if menu2 < 1 or menu2 > 5:
                     raise Exception("Opção Inválida.")
                 if menu2 == 5:
@@ -150,6 +155,7 @@ class Clinica:
             
             if menu2 == 1:
                 print("\n##### Honorários #####\n")
+                ws.Beep(370, 500)
                 print("Insira documento do paciente:")
                 documento = input(">> ")
                 for paciente in self.listaPacientes:
@@ -169,6 +175,7 @@ class Clinica:
                     if paciente.documento == documento:
                         paciente.alta = True
                         print("\nPaciente recebeu alta no sistema com sucesso.\n")
+                        ws.Beep(170, 500)
                     else:
                         continue
             
