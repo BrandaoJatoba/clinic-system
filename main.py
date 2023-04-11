@@ -1,6 +1,7 @@
 from medico import Medico, Cardiologista, Dermatologista, Geral, Cirurgiao
 from paciente import Paciente
 from clinica import Clinica
+from interface import Interface
 import winsound as ws
 
 
@@ -41,17 +42,18 @@ if __name__ == "__main__":
             f"4 - Sair")
         print("************************************************")
         #try:
+        ws.Beep(170, 400)
         menu1 = int(input(">> "))
-        ws.Beep(170, 500)
+        ws.Beep(670, 400)
         if menu1 < 1 or menu1 > 4:
             raise Exception("Opção Inválida.")
         if menu1 == 4:
             break
         if menu1 == 1:
-            clinica.menuMedico()
+            Interface.menuMedico()
         if menu1 == 2:
-            clinica.menuPaciente()
+            Interface.menuPaciente()
         if menu1 == 3:
-            clinica.menuAdministracao()
+            Interface.menuAdministracao()
         #except:
         print(str(Exception))
