@@ -102,12 +102,13 @@ class Interface:
                 nome = input("Nome:\n")
                 idade = int(input("Idade:\n"))
                 cpf = input("CPF:\n")
-                particular = Clinica.filtrarSimNao(input("Particular (S)im ou (N)ão\n"))
+                particular = Interface.filtrarSimNao(input("Particular (S)im ou (N)ão\n"))
                 lista = "Médicos:\n"
                 for x in Clinica.listaMedicos:
                     lista += "({0}) - {1} (Especialidade: {2})\n".format(x.matricula, x.nome, x.especialidade)
                 medico = int(input(lista))
                 paciente = Paciente(documento, nome, idade, cpf, particular, medico)
+                Clinica.adicionarPaciente(paciente)
                 print("\nPaciente cadastrado com sucesso!\n")
                 ws.Beep(470, 500)
                 continue

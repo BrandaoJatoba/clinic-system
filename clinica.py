@@ -15,7 +15,6 @@ class Clinica:
     @staticmethod
     def adicionarPaciente(paciente):
         Clinica.listaPacientes.append(paciente)
-        print(Clinica.listaPacientes)
         pass
 
     @staticmethod
