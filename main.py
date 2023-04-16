@@ -46,6 +46,7 @@ if __name__ == "__main__":
         menu1 = int(input(">> "))
         ws.Beep(670, 400)
         if menu1 < 1 or menu1 > 4:
+            ws.Beep(70, 400)
             raise Exception("Opção Inválida.")
         if menu1 == 4:
             break
