@@ -2,6 +2,19 @@ from clinica import Clinica
 from medico import Medico, Cardiologista, Cirurgiao, Dermatologista, Geral
 import winsound as ws
 from paciente import Paciente
+import os
+
+class Terminal:
+    def clear_terminal():
+        os.system('cls' if os.name == 'nt' else 'clear')
+        pass
+    def header():
+        print()
+        print("************************************************")
+        print("*** Sistema de Registros - Clínica Dr. Lopes ***")
+        print("************************************************")
+        print("\n") 
+        pass
 
 class Interface:
     
@@ -11,27 +24,72 @@ class Interface:
             return True
         else:
             return False
-        
+    
+    @staticmethod
+    def menuPrincipal():
+        msg=""
+        while True:
+            Terminal.clear_terminal()
+            Terminal.header()
+            print("************************************************")
+            print(f"Menu Inicial\n"
+                f"1 - Médicos\n"
+                f"2 - Pacientes\n"
+                f"3 - Administração\n"
+                f"4 - Sair")
+            print("************************************************")
+            print(msg)
+            try:
+                ws.Beep(170, 400)
+                input1 = (input(">> "))
+                if input1.isnumeric() == False:
+                    raise Exception("Insira somente números...")
+                menu1 = int(input1)
+                ws.Beep(670, 400)
+                if menu1 < 1 or menu1 > 4:
+                    ws.Beep(70, 400)
+                    raise Exception("Opção Inválida.")
+                if menu1 == 4:
+                    break
+                if menu1 == 1:
+                    Interface.menuMedico()
+                if menu1 == 2:
+                    Interface.menuPaciente()
+                if menu1 == 3:
+                    Interface.menuAdministracao()
+            except Exception as e:
+                msg = str(e)
+                continue
+
+
     @staticmethod   
     def menuMedico():
+        Terminal.clear_terminal()
+        Terminal.header()
+        msg = ""
         while True:
+            print(msg)
             print(f"Menu Médicos\n"
             f"1 - Cadastrar Médico\n"
             f"2 - Listar Médicos\n"
             f"3 - Solicitações (Estudos, Medicamentos e Cirurgias)\n"
             f"4 - Voltar ao Menu anterior")
             try:
-                menu2 = int(input(">> "))
+                input2 = (input(">> "))
+                if input2.isnumeric() == False:
+                    raise Exception("Insira somente números...")
+                menu2 = int(input2)
                 ws.Beep(170, 500)
                 if menu2 < 1 or menu2 > 4:
                     raise Exception("Opção Inválida.")
                 if menu2 == 4:
                     break
-            except:
-                print(Exception)
+            except Exception as e:
+                msg = str(e)
                 continue
             
             if menu2 == 1:
+                Terminal.clear_terminal()
                 print("....Cadastrando Novo Médico....\n")
                 ws.Beep(370, 400)
                 matricula = int(input("Matricula:\n"))
@@ -71,17 +129,17 @@ class Interface:
                         if solicitacao == 1:
                             paciente.realizarEstudo()
                             ws.Beep(470, 400)
-                            print("Estudo solicitado")
+                            print("\nEstudo solicitado\n")
                         elif solicitacao == 2:
                             paciente.receberMedicamento()
                             ws.Beep(470, 400)
-                            print("Medicamento Solicitado")
+                            print("\nMedicamento Solicitado\n")
                         elif solicitacao == 3:
                             paciente.realizarCirurgia()
                             ws.Beep(470, 400)
-                            print("Cirurgia solicitada")
+                            print("\nCirurgia solicitada\n")
                         else:
-                            print("Erro de Solicitação")
+                            print("\nErro de Solicitação\n")
                     else:
                         continue
                 
@@ -89,20 +147,27 @@ class Interface:
 
     @staticmethod
     def menuPaciente():
+        Terminal.clear_terminal()
+        Terminal.header()
+        msg = ""
         while True:
+            print(msg)
             print(f"Menu Pacientes\n"
             f"1 - Cadastrar Paciente\n"
             f"2 - Listar Pacientes\n"
             f"3 - Voltar ao Menu anterior")
             try:
                 ws.Beep(370, 400)
-                menu2 = int(input(">> "))
+                input1 = (input(">> "))
+                if input1.isnumeric() == False:
+                    raise Exception("Insira somente números...")
+                menu2 = int(input1)
                 if menu2 < 1 or menu2 > 3:
                     raise Exception("Opção Inválida.")
                 if menu2 == 3:
                     break
-            except:
-                print(Exception)
+            except Exception as e:
+                msg = str(e)
                 
             
             if menu2 == 1:
@@ -136,7 +201,11 @@ class Interface:
 
     @staticmethod
     def menuAdministracao():
+        Terminal.clear_terminal()
+        Terminal.header()
+        msg=""
         while True:
+            print(msg)
             print(f"Menu Administracão\n"
             f"1 - Calculo de Honorários\n"
             f"2 - Alta paciente\n"
@@ -150,8 +219,8 @@ class Interface:
                     raise Exception("Opção Inválida.")
                 if menu2 == 5:
                     break
-            except:
-                print(Exception)
+            except Exception:
+                msg = str(Exception)
                 
             
             if menu2 == 1:

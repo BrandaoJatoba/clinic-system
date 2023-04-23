@@ -1,2 +1,5 @@
-# clinic-system for python programming class
-little input validation (TBAdded)
+# A simple Medical Clinic Management System for my python programming class
+
+### Currently it lacks:
+- Input valitadion
+- File database to save data

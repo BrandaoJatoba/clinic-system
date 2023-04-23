@@ -122,7 +122,7 @@ class Paciente:
         particular = "Não"
         if self.particular == True:
             particular = "Sim"
-        return "== Paciente ==\nDocumento: {0}\nNome: {1}\nIdade:{2}\nCPF:{3}\nParticular:{4}\nMédico: {5}\nCirurgia Realizada: {6}\nAlta: {7}\nMedicamentos Recebidos: {8}\nEstudos Solicitados: {9}\nCirurgias Realizadas: {10}".format(self.documento, self.nome, self.idade, self.cpf, particular, self.medico, self.cirurgia, self.alta, self. medicamentos, self.estudos, self.quantidadeCirurgia)
+        return "Documento: {0}\nNome: {1}\nIdade:{2}\nCPF:{3}\nParticular:{4}\nMédico: {5}\nCirurgia Realizada: {6}\nAlta: {7}\nMedicamentos Recebidos: {8}\nEstudos Solicitados: {9}\nCirurgias Realizadas: {10}".format(self.documento, self.nome, self.idade, self.cpf, particular, self.medico, self.cirurgia, self.alta, self. medicamentos, self.estudos, self.quantidadeCirurgia)
     
     def __repr__(self):
         return "Paciente({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10})".format(self.documento, self.nome, self.idade, self.cpf, self.particular, self.medico, self.cirurgia, self.alta, self.medicamentos, self.estudos, self.quantidadeCirurgia)
