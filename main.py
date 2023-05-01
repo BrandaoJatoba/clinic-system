@@ -1,5 +1,4 @@
-from medico import Cardiologista, Dermatologista, Geral, Cirurgiao
-from paciente import Paciente
+
 from clinica import Clinica
 from interface import Interface, Terminal
 

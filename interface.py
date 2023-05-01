@@ -61,7 +61,6 @@ class Interface:
                 msg = str(e)
                 continue
 
-
     @staticmethod   
     def menuMedico():
         Terminal.clear_terminal()
@@ -72,17 +71,16 @@ class Interface:
             print(f"Menu Médicos\n"
             f"1 - Cadastrar Médico\n"
             f"2 - Listar Médicos\n"
-            f"3 - Solicitações (Estudos, Medicamentos e Cirurgias)\n"
-            f"4 - Voltar ao Menu anterior")
+            f"3 - Voltar ao Menu anterior")
             try:
                 input2 = (input(">> "))
                 if input2.isnumeric() == False:
                     raise Exception("Insira somente números...")
                 menu2 = int(input2)
                 ws.Beep(170, 500)
-                if menu2 < 1 or menu2 > 4:
+                if menu2 < 1 or menu2 > 3:
                     raise Exception("Opção Inválida.")
-                if menu2 == 4:
+                if menu2 == 3:
                     break
             except Exception as e:
                 msg = str(e)
@@ -116,34 +114,6 @@ class Interface:
                 ws.Beep(370, 400)
                 continue
 
-            if menu2 == 3:
-                print("....Solicitar Estudos, Medicamentos ou Cirurgia....\n")
-                print("Insira documento do paciente:")
-                ws.Beep(370, 400)
-                documento = input(">> ")
-                print("Insira tipo de solicitação: 1- Estudo, 2 - Medicamento, 3 - Cirurgia")
-                ws.Beep(370, 400)
-                solicitacao = int(input(">> "))
-                for paciente in Clinica.listaPacientes:
-                    if paciente.documento == documento:
-                        if solicitacao == 1:
-                            paciente.realizarEstudo()
-                            ws.Beep(470, 400)
-                            print("\nEstudo solicitado\n")
-                        elif solicitacao == 2:
-                            paciente.receberMedicamento()
-                            ws.Beep(470, 400)
-                            print("\nMedicamento Solicitado\n")
-                        elif solicitacao == 3:
-                            paciente.realizarCirurgia()
-                            ws.Beep(470, 400)
-                            print("\nCirurgia solicitada\n")
-                        else:
-                            print("\nErro de Solicitação\n")
-                    else:
-                        continue
-                
-                        
 
     @staticmethod
     def menuPaciente():
@@ -155,16 +125,17 @@ class Interface:
             print(f"Menu Pacientes\n"
             f"1 - Cadastrar Paciente\n"
             f"2 - Listar Pacientes\n"
-            f"3 - Voltar ao Menu anterior")
+            f"3 - Solicitar Exames, Medicamentos e Cirurgia\n"
+            f"4 - Voltar ao Menu anterior")
             try:
                 ws.Beep(370, 400)
                 input1 = (input(">> "))
                 if input1.isnumeric() == False:
                     raise Exception("Insira somente números...")
                 menu2 = int(input1)
-                if menu2 < 1 or menu2 > 3:
+                if menu2 < 1 or menu2 > 4:
                     raise Exception("Opção Inválida.")
-                if menu2 == 3:
+                if menu2 == 4:
                     break
             except Exception as e:
                 msg = str(e)
@@ -197,7 +168,33 @@ class Interface:
                 ws.Beep(370, 400)
                 Clinica.imprimirListaPacientes()
                 continue
-    
+
+            if menu2 == 3:
+                print("....Solicitar Estudos, Medicamentos ou Cirurgia....\n")
+                print("Insira documento do paciente:")
+                ws.Beep(370, 400)
+                documento = input(">> ")
+                print("Insira tipo de solicitação: 1- Estudo, 2 - Medicamento, 3 - Cirurgia")
+                ws.Beep(370, 400)
+                solicitacao = int(input(">> "))
+                for paciente in Clinica.listaPacientes:
+                    if paciente.documento == documento:
+                        if solicitacao == 1:
+                            paciente.realizarEstudo()
+                            ws.Beep(470, 400)
+                            print("\nEstudo solicitado\n")
+                        elif solicitacao == 2:
+                            paciente.receberMedicamento()
+                            ws.Beep(470, 400)
+                            print("\nMedicamento Solicitado\n")
+                        elif solicitacao == 3:
+                            paciente.realizarCirurgia()
+                            ws.Beep(470, 400)
+                            print("\nCirurgia solicitada\n")
+                        else:
+                            print("\nErro de Solicitação\n")
+                    else:
+                        continue
 
     @staticmethod
     def menuAdministracao():
@@ -219,8 +216,8 @@ class Interface:
                     raise Exception("Opção Inválida.")
                 if menu2 == 5:
                     break
-            except Exception:
-                msg = str(Exception)
+            except Exception as e:
+                msg = str(e)
                 
             
             if menu2 == 1:
@@ -229,6 +226,7 @@ class Interface:
                 print("Insira documento do paciente:")
                 documento = input(">> ")
                 ws.Beep(370, 400)
+                found = False
                 for paciente in Clinica.listaPacientes:
                     servico = not paciente.particular
                     if paciente.documento == documento:
@@ -237,19 +235,27 @@ class Interface:
                                 print(f"Honorários Devidos:\n"
                                       f"RS {paciente.pagamento(medico, servico):,.2f}\n"
                                       )
+                        found = True
+                if found == False:
+                    print("Paciente não Encontrado")
 
             if menu2 == 2:
                 print("\n##### Alta #####\n")
                 print("Insira documento do paciente:")
                 ws.Beep(370, 400)
                 documento = input(">> ")
+                found = False
                 for paciente in Clinica.listaPacientes:
                     if paciente.documento == documento:
                         paciente.alta = True
                         print("\nPaciente recebeu alta no sistema com sucesso.\n")
                         ws.Beep(470, 500)
+                        found = True
                     else:
                         continue
+                if found == False:
+                    print("Paciente não Encontrado")
+                        
             
             if menu2 == 3:
                 print("##### Pagamentos em Aberto #####\n")
@@ -258,7 +264,7 @@ class Interface:
                     if paciente.alta == False:
                         print(paciente)
                         print()
-            
+                                
             if menu2 == 4:
                 print("##### Pagamentos Realizados #####\n")
                 ws.Beep(370, 400)
